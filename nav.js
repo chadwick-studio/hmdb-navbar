@@ -39,7 +39,6 @@ document.addEventListener("click", (e) => {
   let currentDropdown;
   if (dropdownButton) {
     currentDropdown = e.target.closest("[data-dropdown]");
-    console.log(currentDropdown);
     currentDropdown.classList.toggle("active");
   }
 
