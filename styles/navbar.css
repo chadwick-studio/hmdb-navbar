@@ -184,10 +184,10 @@ body {
 }
 
 /** Logo **/
-.logo-wrapper {
+.logo-wrapper a {
   display: flex;
   gap: 0.25em;
-  padding: 0.5em;
+  margin-block: 0.5em;
 }
 .logo-wrapper img {
   display: block;
@@ -201,6 +201,7 @@ body {
   white-space: nowrap;
   line-height: 0.85;
   word-spacing: -1px;
+  margin-bottom: -2px;
   align-self: end;
 }
 
