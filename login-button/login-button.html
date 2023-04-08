@@ -1,1 +1,24 @@
+<style>
+:root {
+--primary-orange: hsl(31, 100%, 44%);
+--login-button-text: hsl(31, 100%, 5%);
+--login-button-hover-background: hsl(31, 100%, 60%);
+}
+
+.login-button {
+  display: inline-block;
+  padding-block: 1em;
+  padding-inline: 2em;
+  font-size: 1.125;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: var(--primary-orange);
+  color: var(--login-button-text);
+}
+.login-button:hover {
+  background-color: var(--login-button-hover-background);
+}
+
+</style>
+
 <button class="login-button">Login</button>
