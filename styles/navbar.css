@@ -55,7 +55,7 @@
 :root {
   --nav-background: hsl(240, 12%, 10%);
   --white: hsl(0, 0%, 94%);
-  --primary-orange: hsla(31, 100%, 44%, 1);
+  --primary-orange: hsl(31, 100%, 44%);
   --primary-orange-light: hsl(35, 100%, 61%);
   --primary-orange-dark: hsl(35, 80%, 40%);
   --logout-button-background: hsl(242, 100%, 85%);
