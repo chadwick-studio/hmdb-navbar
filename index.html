@@ -10,8 +10,11 @@
     <header class="primary-header">
       <div class="logo-wrapper">
         <a href="https://hmdb.org">
-        <img src="./static/hmdblogo.svg" alt='The Historical Marker Database Logo. The letters "HMdb" are present, with a historical marker sign appearing at the top of the letter H' />
-        <h1>The Historical Marker Database</h1>
+          <img
+            src="./static/hmdblogo.svg"
+            alt='The Historical Marker Database Logo. The letters "HMdb" are present, with a historical marker sign appearing at the top of the letter H'
+          />
+          <h1>The Historical Marker Database</h1>
         </a>
       </div>
       <div class="menu">
@@ -178,11 +181,7 @@
               />
             </svg>
             <form method="get" action="results.asp">
-              <input
-                type="text"
-                name="SearchFor"
-                placeholder="Search Keywords..."
-              />
+              <input type="text" name="SearchFor" placeholder="Search..." />
               <button
                 id="searchButton"
                 class="search-button"
@@ -208,10 +207,10 @@
             </form>
           </div>
         </div>
-        <div id="profile" class="profile" data-visible="false">
+        <div id="user-profile" class="user-profile" data-visible="false">
           <button
-            data-dropdown-button
-            aria-controls="profile"
+            data-user-profile-button
+            aria-controls="user-profile"
             aria-expanded="false"
           >
             <svg
@@ -219,7 +218,7 @@
               width="100%"
               height="100%"
               fill="currentColor"
-              class="profile-icon"
+              class="user-profile-icon"
               viewBox="0 0 16 16"
             >
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -230,9 +229,9 @@
             </svg>
             <span class="sr-only">My Profile</span>
           </button>
-          <div class="profile-dropdown-menu">
+          <div class="user-profile-dropdown-menu">
             <menu>
-              <li><a href="/my-profile">My Profile</a></li>
+              <li><a href="/my-user-profile">My Profile</a></li>
               <li><a href="/my-markers">My Markers</a></li>
               <li><a href="/add-a-marker">Add a Marker</a></li>
             </menu>
@@ -264,7 +263,7 @@
               height="80%"
               fill="currentColor"
               stroke="black"
-              stroke-width="1"
+              stroke-width=".5"
               class="close-icon"
               viewBox="0 0 16 16"
             >

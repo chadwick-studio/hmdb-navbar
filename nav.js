@@ -1,70 +1,92 @@
-// Mobile Menu Toggle
+// Get DOM elements for mobile and profile menu toggles
 const mobileMenu = document.querySelector(".mobile-menu");
 const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+const profileMenu = document.querySelector(".user-profile");
+const profileMenuToggle = document.querySelector("[data-user-profile-button]");
 
-mobileMenuToggle.addEventListener("click", () => {
-  const visibility = mobileMenu.getAttribute("data-visible");
-  if (visibility === "false") {
-    mobileMenu.setAttribute("data-visible", true);
-    mobileMenuToggle.setAttribute("aria-expanded", true);
-  } else if (visibility === "true") {
-    mobileMenu.setAttribute("data-visible", false);
-    mobileMenuToggle.setAttribute("aria-expanded", false);
-  }
-});
+// Toggle menu visibility
+function toggleMenuVisibility(menu, button) {
+	const menuVisible = menu.getAttribute("data-visible") === "true";
+	menu.setAttribute("data-visible", !menuVisible);
+	button.setAttribute("aria-expanded", !menuVisible);
+}
 
-// Profile Menu Toggle
-const profileMenu = document.querySelector(".profile");
-const profileMenuToggle = document.querySelector(
-  ".profile > [data-dropdown-button]"
-);
+// Close profile menu
+function closeProfileMenu() {
+	profileMenu.setAttribute("data-visible", false);
+}
 
-profileMenuToggle.addEventListener("click", () => {
-  const visibility = profileMenu.getAttribute("data-visible");
-  console.log(visibility);
-  if (visibility === "false") {
-    profileMenu.setAttribute("data-visible", true);
-    profileMenuToggle.setAttribute("aria-expanded", true);
-  } else if (visibility === "true") {
-    profileMenu.setAttribute("data-visible", false);
-    profileMenuToggle.setAttribute("aria-expanded", false);
-  }
-});
+// Handle mobile and profile menu toggles
+function setupMenuToggles() {
+	mobileMenuToggle.addEventListener("click", () => {
+		toggleMenuVisibility(mobileMenu, mobileMenuToggle);
+		closeProfileMenu();
+	});
 
-// Nav Menu Dropdown
-document.addEventListener("click", (e) => {
-  const dropdownButton = e.target.matches("[data-dropdown-button]");
-  if (!dropdownButton && e.target.closest("[data-dropdown]") != null) return;
+	profileMenuToggle.addEventListener("click", () => {
+		toggleMenuVisibility(profileMenu, profileMenuToggle);
+	});
+}
 
-  let currentDropdown;
-  if (dropdownButton) {
-    currentDropdown = e.target.closest("[data-dropdown]");
-    currentDropdown.classList.toggle("active");
-  }
+// Handle nav menu dropdown
+function setupNavMenuDropdown() {
+	document.addEventListener("click", (event) => {
+		const isDropdownButton = event.target.matches("[data-dropdown-button]");
+		if (!isDropdownButton && event.target.closest("[data-dropdown]") != null) {
+			return;
+		}
 
-  if (mobileMenu.getAttribute("data-visible") === "false") {
-    document
-      .querySelectorAll("[data-parent-dropdown].active")
-      .forEach((dropdown) => {
-        const childDropdown = dropdown.querySelector("[data-child-dropdown]");
-        if (dropdown === currentDropdown || childDropdown === currentDropdown)
-          return;
-        dropdown.classList.remove("active");
-        if (childDropdown) {
-          childDropdown.classList.remove("active");
-        }
-      });
-  }
-});
+		let currentDropdown;
+		if (isDropdownButton) {
+			currentDropdown = event.target.closest("[data-dropdown]");
+			currentDropdown.classList.toggle("active");
+		}
+
+		if (mobileMenu.getAttribute("data-visible") === "false") {
+			document
+				.querySelectorAll("[data-parent-dropdown].active")
+				.forEach((dropdown) => {
+					const childDropdown = dropdown.querySelector("[data-child-dropdown]");
+					if (
+						dropdown === currentDropdown ||
+						childDropdown === currentDropdown
+					) {
+						return;
+					}
+					dropdown.classList.remove("active");
+					if (childDropdown) {
+						childDropdown.classList.remove("active");
+					}
+				});
+
+			if (currentDropdown) {
+				closeProfileMenu();
+			}
+		}
+	});
+}
 
 // Prevent transition from triggering during page resize and load
 let resizeTimer;
-const stopAnimations = () => {
-  document.body.classList.add("resize-animation-stopper");
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    document.body.classList.remove("resize-animation-stopper");
-  }, 400);
-};
-window.addEventListener("resize", stopAnimations);
-window.addEventListener("load", stopAnimations);
+function stopAnimations() {
+	document.body.classList.add("resize-animation-stopper");
+	clearTimeout(resizeTimer);
+	resizeTimer = setTimeout(() => {
+		document.body.classList.remove("resize-animation-stopper");
+	}, 400);
+}
+
+function setupResizeListener() {
+	window.addEventListener("resize", stopAnimations);
+	window.addEventListener("load", stopAnimations);
+}
+
+// Set up all event listeners and other functionality
+function init() {
+	setupMenuToggles();
+	setupNavMenuDropdown();
+	setupResizeListener();
+}
+
+// Call the initialize function
+init();

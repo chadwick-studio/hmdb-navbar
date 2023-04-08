@@ -24,20 +24,6 @@
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("../static/fonts/SourceSansPro-ExtraLight.woff2") format("woff2");
-  font-weight: 200;
-  font-style: normal;
-  font-display: optional;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("../static/fonts/SourceSansPro-Black.woff2") format("woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: optional;
-}
-@font-face {
-  font-family: "Source Sans Pro";
   src: url("../static/fonts/SourceSansPro-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
@@ -51,6 +37,7 @@
   font-style: normal;
   font-display: optional;
 }
+
 /** Variables **/
 :root {
   --nav-background: hsl(240, 12%, 10%);
@@ -88,6 +75,7 @@ svg {
 
 /** Body Styling **/
 body {
+  /* Browser fallback */
   min-width: 100vh;
   min-width: 100svh;
 }
@@ -95,33 +83,19 @@ body {
 /** Navbar Header **/
 .primary-header {
   display: flex;
-  position: relative;
-  overflow-x: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   min-height: 5rem;
   background-color: var(--nav-background);
   border-bottom: 10px solid var(--primary-orange);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 25px 20px -20px;
   padding-inline: clamp(1.25rem, -4.554rem + 11.607vw, 9.375rem);
   justify-content: space-between;
-  /* Preferred box-sizing value */
-  /* Reapply the pointer cursor for anchor tags */
-  /* Remove list styles (bullets/numbers) */
-  /* For images to not be able to exceed their container */
-  /* removes spacing between cells in tables */
-  /* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
-  /* revert the 'white-space' property for textarea elements on Safari */
-  /* minimum style to allow to style meter element */
-  /* preformatted text - use only for this feature */
-  /* reset default text opacity of input placeholder */
-  /* remove default dot (•) sign */
-  /* fix the feature of 'hidden' attribute.
-   display:revert; revert to element instead of attribute */
-  /* revert for bug in Chromium browsers
-   - fix for the content editable attribute will work properly.
-   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
-  /* apply back the draggable feature - exist only in Chromium and Safari */
-  /* Revert Modal native behavior */
 }
+
+/* Primary Header Reset */
 .primary-header *:where(:not(img, svg, video, audio):not(svg *, symbol *)) {
   all: unset;
   display: revert;
@@ -135,7 +109,6 @@ body {
 .primary-header button {
   cursor: pointer;
 }
-.primary-header ol,
 .primary-header ul,
 .primary-header menu {
   list-style: none;
@@ -144,22 +117,8 @@ body {
   max-inline-size: 100%;
   max-block-size: 100%;
 }
-.primary-header table {
-  border-collapse: collapse;
-}
-.primary-header input,
-.primary-header textarea {
+.primary-header input {
   -webkit-user-select: auto;
-}
-.primary-header textarea {
-  white-space: revert;
-}
-.primary-header meter {
-  -webkit-appearance: revert;
-  appearance: revert;
-}
-.primary-header :where(pre) {
-  all: revert;
 }
 .primary-header ::placeholder {
   color: unset;
@@ -179,9 +138,6 @@ body {
 }
 .primary-header :where([draggable="true"]) {
   -webkit-user-drag: element;
-}
-.primary-header :where(dialog:modal) {
-  all: revert;
 }
 
 /** Logo **/
@@ -207,20 +163,20 @@ body {
 }
 
 /** Profile **/
-.profile {
+.user-profile {
   position: fixed;
   right: 5em;
   top: 1.125em;
   white-space: nowrap;
   z-index: 10;
 }
-.profile menu {
+.user-profile menu {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
 
-.profile-dropdown-menu {
+.user-profile-dropdown-menu {
   display: none;
   position: absolute;
   flex-direction: column;
@@ -242,13 +198,13 @@ body {
   background-color: var(--white);
 }
 
-.profile-icon {
+.user-profile-icon {
   aspect-ratio: 1;
   width: 2.75em;
   fill: var(--white);
 }
 
-.profile[data-visible="true"] > .profile-dropdown-menu {
+.user-profile[data-visible="true"] > .user-profile-dropdown-menu {
   display: flex;
   pointer-events: auto;
   opacity: 1;
@@ -394,36 +350,38 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background-color: var(--white);
   padding-inline: 0.75em;
   padding-block: 0.5em;
   border-radius: 5px;
 }
 .search-bar .search-icon {
-  width: 1.375em;
+  width: 1.25em;
   aspect-ratio: 1;
 }
 .search-bar button .search-button-icon {
-  width: 1.5em;
+  width: 1.25em;
   aspect-ratio: 1;
 }
 .search-bar form {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex: 1;
-  overflow-x: hidden;
-}
-.search-bar form input {
-  width: 8em;
+  gap: 0.5em;
+  width: 100%;
 }
 
+.search-bar form input {
+  width: 100%;
+}
+
+/** Media Queries **/
 @media screen and (width > 400px) {
   .search-bar {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
 }
+
 @media screen and (width > 550px) {
   .logo-wrapper h1 {
     display: inline-block;
@@ -436,7 +394,6 @@ body {
   }
   .search-bar {
     font-size: 1.25rem;
-    max-width: 20em;
   }
 }
 @media screen and (width > 700px) {
@@ -444,7 +401,10 @@ body {
     font-size: 3rem;
   }
 }
-@media screen and (width > 1150px) {
+@media screen and (width > 1270px) {
+  .primary-header {
+    position: static;
+  }
   .search-bar {
     font-size: 1.125rem;
   }
@@ -491,7 +451,7 @@ body {
   .nav-link:focus-visible {
     border-bottom: 5px solid var(--primary-orange);
   }
-  .profile {
+  .user-profile {
     position: relative;
     inset: 0;
   }
@@ -536,17 +496,16 @@ body {
   .search-bar {
     font-size: 1rem;
     padding-block: 0.5em;
-    flex-grow: 1;
     width: 15em;
   }
   .star-icon {
     fill: var(--primary-orange);
   }
-  .profile-dropdown-menu {
+  .user-profile-dropdown-menu {
     font-size: 1.25rem;
     left: calc(-100% - 1em);
   }
-  .profile-dropdown-menu menu {
+  .user-profile-dropdown-menu menu {
     gap: 1em;
   }
   .logout-button {
@@ -556,8 +515,5 @@ body {
 @media screen and (width > 1440px) {
   .navigation {
     font-size: 1.25rem;
-  }
-  .search-bar {
-    width: 20eem;
   }
 }
