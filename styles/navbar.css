@@ -89,14 +89,14 @@ svg {
 /** Body Styling **/
 body {
   min-width: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
+  min-width: 100svh;
 }
 
 /** Navbar Header **/
 .primary-header {
   display: flex;
   position: relative;
+  overflow-x: hidden;
   min-height: 5rem;
   background-color: var(--nav-background);
   border-bottom: 10px solid var(--primary-orange);
@@ -270,6 +270,7 @@ body {
 
 /** Menu **/
 .menu {
+  position: relative;
   font-family: "Source Sans Pro";
 }
 
@@ -326,6 +327,7 @@ body {
 /** Navigation **/
 .navigation {
   display: flex;
+  position: relative;
   flex-direction: column;
   font-size: 1.375rem;
   white-space: nowrap;
