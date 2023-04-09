@@ -432,8 +432,6 @@ body {
   }
   .navigation a,
   .navigation button {
-    display: flex;
-    align-items: center;
     padding: 0;
     height: auto;
     width: auto;
@@ -467,7 +465,6 @@ body {
   }
   .dropdown-menu a,
   .dropdown-menu button {
-    display: block;
     width: 12em;
     padding-block: 1em;
     padding-left: 1em;
